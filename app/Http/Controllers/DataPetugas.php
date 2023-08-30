@@ -92,23 +92,6 @@ class DataPetugas extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    // {
-    //     $rules = [
-    //         'name' => 'required|max:255',
-    //         'induk' => 'required|max:255',
-    //         'jabatan_id' => 'max:255',
-    //         'password' => 'required|min:8|max:255'
-    //     ];
-
-    //     $validatedData = $request->validate($rules);
-
-    //     $validatedData['password'] = Hash::make($validatedData['password']);
-
-    //     user::where('id', $user->id)
-    //         ->update($validatedData);
-
-    //     return redirect('/datapengguna')->with('success', 'Data Pengguna Berhasil di Ubah!');
-    // }
     {
         request()->validate([
             'induk'       => 'required|string|min:2|max:100',

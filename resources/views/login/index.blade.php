@@ -1,132 +1,96 @@
-{{-- @extends('layouts.main')
-
-
-@section('content')
-    
-<div class="container my-4">
-
-    <div class="row justify-content-center">
-
-        <div class="col-md-6">
-
-            <div class="card o-hidden border-0 shadow-lg my-5">
-                <div class="card-body p-0">
-                        <div class="col-lg-12 p-5">
-                                <div class="text-center">
-                                    <img src="/logo/PT-Samudra-marine-Indonesia.png" width="30%" height="40%">
-                                    <h1 class="h4 text-dark my-3">
-                                    <strong>PT. SAMUDRA MARINE INDONESIA</strong>
-                                    </h1>
-                                    <hr>
-                                </div>
-
-                                <form action="/" method="post" >
-                                    @csrf
-                                    <div class="form-group">
-                                        <label for="induk" class="text-dark"><strong>No Induk Karyawans</strong></label>
-                                        <input type="induk" class="form-control"
-                                            id="induk" name="induk" placeholder="Enter induk Address..." >
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password" class="text-dark"><strong>Password</strong></label>
-                                        <input type="password" class="form-control "
-                                            id="password" name="password" placeholder="Password">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary btn-block">
-                                        Login
-                                    </button>
-                                </form>
-                                <hr>
-                        </div>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-    @include('sweetalert::alert')
-    @endsection --}}
-
 <!DOCTYPE html>
-<html>
+
+<html lang="en" class="light-style customizer-hide" dir="ltr" data-theme="theme-default" data-assets-path="/login/"
+    data-template="vertical-menu-template-free">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link href="/logo/PT-Samudra-marine-Indonesia.png" rel="icon">
-    <title>SMI | Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/login/plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="/login/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <link rel="stylesheet" href="/login/dist/css/adminlte.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>PT. IPT | Login</title>
+    <meta name="description" content="" />
+    <link rel="icon" type="image/x-icon" href="/logo/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="/login/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="/login/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="/login/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="/login/css/demo.css" />
+    <link rel="stylesheet" href="/login/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="/login/vendor/css/pages/page-auth.css" />
+    <script src="/login/vendor/js/helpers.js"></script>
+    <script src="/login/js/config.js"></script>
 </head>
 
-<body class="hold-transition login-page bg-primary">
-    <div class="login-box">
-        <div class="card">
-            <div class="card-body login-card-body">
-                <div class="login-logo">
-                    <a href="/">
-                        <font color="blue">
-                            <strong>PT. SAMUDRA MARINE INDONESIA</strong>
-                        </font>
-                    </a>
-                </div>
-                <center>
-                    <img src="/logo/PT-Samudra-marine-Indonesia.png" width=180px />
-                    <br>
-                    <br>
-                </center>
-                <form action="/login" method="post">
-                    @csrf
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="induk" placeholder="Id Karyawan"
-                            value="{{ old('induk') }}" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" name="password" placeholder="Password" required>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
+<body class="bg-primary">
 
-                    <div class="row">
-                        <div class="col-6">
-                            <a href="/" class="btn btn-danger btn-block btn-flat" name="btnLogin"
-                                title="Masuk Sistem">
-                                <b><i class="fas fa-arrow-left"></i> Batal</b>
+    <div class="container-xxl">
+        <div class="authentication-wrapper authentication-basic container-p-y">
+            <div class="authentication-inner">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="app-brand justify-content-center">
+                            <a href="/login" class="app-brand-link gap-2">
+                                <img src="/logo/logo.png" width=100px />
+                                {{-- <span class="app-brand-text demo text-body fw-bolder">PT. INDAH PERSADA TECH</span>
+                                --}}
                             </a>
                         </div>
-                        <div class="col-6">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat" name="btnLogin"
-                                title="Masuk Sistem">
-                                <b><i class="fas fa-person-walking-dashed-line-arrow-right"></i> Masuk</b>
-                            </button>
+                        <div class="app-brand justify-content-center">
+                            <h4 class="mb-2 Text-center">PT. INDAH PERSADA TECH</h4>
                         </div>
-                </form>
+                        {{-- <p class="mb-4">Please sign-in to your account and start the adventure</p> --}}
 
+
+                        <form id="formAuthentication" class="mb-3" action="/login" method="POST">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Nomor Induk Pegawai</label>
+                                <input type="text" class="form-control @error('induk') is-invalid @enderror"
+                                    name="induk" placeholder="Id Karyawan" value="{{ old('induk') }}" required
+                                    autofocus>
+                                @error('induk')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                                {{-- <input type="text" class="form-control" id="email" name="email-username"
+                                    placeholder="Enter your email or username" /> --}}
+                            </div>
+                            <div class="mb-3 form-password-toggle">
+                                <div class="d-flex justify-content-between">
+                                    <label class="form-label" for="password">Password</label>
+                                </div>
+                                <div class="input-group input-group-merge">
+                                    <input type="password" id="password" class="form-control" name="password"
+                                        placeholder="Password" aria-describedby="password" />
+                                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <button class="btn btn-primary d-grid w-100" type="submit">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     @include('sweetalert::alert')
-    <script src="/login/plugins/jquery/jquery.min.js"></script>
-    <script src="/login/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/login/dist/js/adminlte.min.js"></script>
-    <script src="/login/plugins/alert.js"></script>
 
+    <script src="/login/vendor/libs/jquery/jquery.js"></script>
+    <script src="/login/vendor/libs/popper/popper.js"></script>
+    <script src="/login/vendor/js/bootstrap.js"></script>
+    <script src="/login/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="/login/vendor/js/menu.js"></script>
+    <script src="/login/js/main.js"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 
 </html>

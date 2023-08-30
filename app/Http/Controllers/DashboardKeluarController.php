@@ -19,7 +19,7 @@ class DashboardKeluarController extends Controller
     {
         $kode = Keluar::kode();
         return view('dashboard.keluar.index', [
-            'title' => 'Keluar',
+            'title' => 'Surat Arsip Keluar',
             "keluar1" => Keluar::latest()->where('user_id', auth()->user()->id)->paginate(5)->withQueryString(),
             'user' => User::where('id', auth()->user()->id)->get(),
             'keluar' => Keluar::where('user_id', auth()->user()->id)->get(),
@@ -45,7 +45,7 @@ class DashboardKeluarController extends Controller
      */
     public function store(Request $request)
     {
-        // buat ngeposting data 
+        // buat ngeposting data
         $validatedData = $request->validate([
             'kodesk' => 'required|max:255',
             'nama' => 'required|max:255',
@@ -66,8 +66,8 @@ class DashboardKeluarController extends Controller
         $validatedData['user_id'] = auth()->user()->id;
         // buat menyimpan postingan
         Keluar::create($validatedData);
-        // untuk menampilkan alert atau kata sukses 
-        return redirect('/dashboard/keluar')->with('toast_success', 'Surat keluar Berhasil Ditambahkan!');
+        // untuk menampilkan alert atau kata sukses
+        return redirect('/dashboard/keluar')->with('success', 'Surat keluar Berhasil Ditambahkan!');
     }
 
     /**
@@ -78,12 +78,12 @@ class DashboardKeluarController extends Controller
      */
     public function show(Keluar $keluar)
     {
-        return view('dashboard.keluar.show', [
-            'keluar' => $keluar,
-            'title' => 'Surat Keluar',
-            'user' => User::where('id', auth()->user()->id)->get(),
+        // return view('dashboard.keluar.show', [
+        //     'keluar' => $keluar,
+        //     'title' => 'Surat Keluar',
+        //     'user' => User::where('id', auth()->user()->id)->get(),
 
-        ]);
+        // ]);
     }
 
     /**
@@ -94,12 +94,12 @@ class DashboardKeluarController extends Controller
      */
     public function edit(Keluar $keluar)
     {
-        return view('dashboard.keluar.edit', [
-            'keluar' => $keluar,
-            'title' => 'Surat Keluar',
-            'user' => User::where('id', auth()->user()->id)->get(),
+        // return view('dashboard.keluar.edit', [
+        //     'keluar' => $keluar,
+        //     'title' => 'Surat Keluar',
+        //     'user' => User::where('id', auth()->user()->id)->get(),
 
-        ]);
+        // ]);
     }
 
     /**
@@ -142,7 +142,7 @@ class DashboardKeluarController extends Controller
         Keluar::where('id', $keluar->id)
             ->update($validatedData);
 
-        return redirect('/dashboard/keluar')->with('toast_success', 'Surat keluar Berhasil Diedit!');
+        return redirect('/dashboard/keluar')->with('success', 'Surat keluar Berhasil Diedit!');
         return back()->with('error', 'Data Failed!');
     }
 
@@ -157,9 +157,9 @@ class DashboardKeluarController extends Controller
         if ($keluar->pdf) {
             Storage::delete($keluar->pdf);
         }
-        // buat deleted data 
+        // buat deleted data
         $keluar::destroy($keluar->id);
         // alert sukses delete
-        return redirect('/dashboard/keluar')->with('toast_success', 'Surat keluar Berhasil Dihapus!');
+        return redirect('/dashboard/keluar')->with('success', 'Surat keluar Berhasil Dihapus!');
     }
 }

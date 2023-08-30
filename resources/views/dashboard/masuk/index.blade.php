@@ -1,92 +1,124 @@
-@extends('layouts.dashboard')
+@extends('dashboard.layouts.index')
 
 @section('content')
-<h1 class="mt-3 text-capitalize">Arsip Surat Masuk</h1>
-<hr>
-    <div class="shadow bg-body rounded mb-5">
-        <div class="card-header">
-            <i class="fas fa-table me-1"></i>
-            Arsip Surat Masuk
-        </div>
-        <div class="card-body">
-            <a type="create" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#mocreat"
-                data-bs-whatever="@mdo"><i class="bi bi-bookmark-plus"></i> <strong>Buat Baru</strong></a>
-            <a href="/surat/masuk/print" target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm"
-                data-bs-toggle="modal" data-bs-target="#printall"><i class="fas fa-print fa-sm"></i>
-                <strong>Print Report</strong></a>
-            @include('dashboard.masuk.create')
-            @include('dashboard.masuk.printall')
 
-            <table id="datatablesSimple">
-                <thead>
+
+<a type="create" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#mocreat"
+    data-bs-whatever="@mdo"><i class="fa fa-plus"></i> Buat Baru</a>
+<a type="create" class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#printall"
+    data-bs-whatever="@mdo"><i class="fa fa-print"></i> Print All</a>
+@include('dashboard.masuk.create')
+@include('dashboard.masuk.printall')
+
+<div class="card mt-3 shadow rounded">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped border-dark" id="datatable">
+                <thead class="text-center">
                     <tr>
-                        <th><strong>No</strong></th>
-                        <th><strong>Kode Arsip</strong></th>
-                        <th><strong>Nomor Surat</strong></th>
-                        <th><strong>Pengirim</strong></th>
-                        <th><strong>Tanggal Surat</strong></th>
-                        <th><strong>Perihal Surat</strong></th>
-                        <th><strong>Alamat Surat</strong></th>
-                        <th><strong>Action</strong></th>
+                        <th>No</th>
+                        <th>Kode Arsip</th>
+                        <th>Nomor Surat</th>
+                        <th>Pengirim</th>
+                        <th>Tanggal Surat</th>
+                        <th>Perihal</th>
+                        <th>Alamat</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($masuk1 as $masuk)
-                        <tr>
-                            <td class="text-center"><strong>{{ $loop->iteration }}</strong></td>
-                            <td>{{ $masuk->kodesm }}</td>
-                            <td>{{ $masuk->nomor }}</td>
-                            <td>{{ $masuk->pengirim }}</td>
-                            <td>{{ $masuk->tanggal }}</td>
-                            <td>{{ $masuk->prihal }}</td>
-                            <td>{{ $masuk->alamat }}</td>
-                            <td>
-                                <a href="/dashboard/masuk/{{ $masuk->id }}" class="btn btn-success btn-sm m-1"
-                                    data-bs-toggle="modal" data-bs-target="#masukshow{{ $masuk->id }}"><i
-                                        class="bi bi-eye"></i>
+
+                    @php
+                    $pengirim = implode(' ', array_slice(str_word_count($masuk->pengirim, 1), 0, 5));
+                    $prihal = implode(' ', array_slice(str_word_count($masuk->prihal, 1), 0, 5));
+                    $alamat = implode(' ', array_slice(str_word_count($masuk->alamat, 1), 0, 5));
+                    @endphp
+
+                    @php
+                    \Carbon\Carbon::setLocale('id');
+                    @endphp
+
+                    <tr>
+                        <td class="text-center font-weight-bold">{{ $loop->iteration }}</td>
+                        <td>{{ $masuk->kodesm }}</td>
+                        <td>{{ $masuk->nomor }}</td>
+                        <td>{{ $pengirim }}</td>
+                        <td>{{ \Carbon\Carbon::parse($masuk->tanggal)->format('d F Y') }}</td>
+                        <td>{{ $prihal }}</td>
+                        <td>{{ $alamat }}</td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Surat Masuk Actions">
+                                <a href="/dashboard/masuk/{{ $masuk->id }}" class="btn btn-success btn-sm"
+                                    data-bs-toggle="modal" data-bs-target="#masukshow{{ $masuk->id }}">
+                                    <i class="fa fa-eye"></i>
                                 </a>
 
-                                <a href="/dashboard/masuk/{{ $masuk->id }}/edit" class="btn btn-warning btn-sm m-1"
-                                    data-bs-toggle="modal" data-bs-target="#masukedit{{ $masuk->id }}"><i
-                                        class="bi bi-pen text-light"></i>
+                                <a href="/dashboard/masuk/{{ $masuk->id }}/edit" class="btn btn-warning btn-sm"
+                                    data-bs-toggle="modal" data-bs-target="#masukedit{{ $masuk->id }}">
+                                    <i class="fa fa-pen text-light"></i>
                                 </a>
 
-                                {{-- <a href="/dashboard/masuk/{{ $masuk->id }}" class="btn btn-sm btn-secondary"
+                                <a href="/dashboard/masuk/{{ $masuk->id }}" class="btn btn-sm btn-info"
                                     data-bs-toggle="modal" data-bs-target="#printmasuk{{ $masuk->id }}">
-                                    <i class="bi bi-printer text-light"></i>
-                                </a> --}}
-                                <a href="/dashboard/masuk/{{ $masuk->id }}" class="btn btn-sm btn-secondary"
-                                    data-bs-toggle="modal" data-bs-target="#printmasuk{{ $masuk->id }}">
-                                    <i class="bi bi-printer text-light"></i>
+                                    <i class="fa fa-print text-light"></i>
                                 </a>
 
-                               
+                                {{-- <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#DeleteModal{{ $masuk->id }}">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
 
-                                <form action="/dashboard/masuk/{{ $masuk->id }}" method="post" class="d-inline"
-                                    id="delete-mail">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="btn btn-danger btn-sm m-1 btnDelete"
-                                        onclick="return confirm('Are you sure?')"><i class="bi bi-trash"></i></button>
-                                </form>
+                            <div class="modal fade" id="DeleteModal{{ $masuk->id }}" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            </div> --}}
 
-                                @include('dashboard.masuk.show')
-                                @include('dashboard.masuk.edit')
-                                @include('dashboard.masuk.print')
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#DeleteModal{{ $masuk->id }}">
+                                <i class="fa fa-trash"></i>
+                            </button>
 
-                            </td>
-                        </tr>
+
+                            <div class="modal fade" id="DeleteModal{{ $masuk->id }}" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title fs-5" id="exampleModalLabel">Konfirmasi Hapus</h5>
+                                            <button type="button" class="close" data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body text-capitalize">
+                                            Apakah Anda Yakin Ingin Menghapus surat masuk {{ $masuk->pengirim }}?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Batal</button>
+                                            <form action="/dashboard/masuk/{{ $masuk->id }}" method="post"
+                                                class="d-inline" id="delete-mail">
+                                                @method('delete')
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">Ya, Hapus!</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @include('dashboard.masuk.show')
+                            @include('dashboard.masuk.edit')
+                            @include('dashboard.masuk.print')
+                        </td>
+                    </tr>
                     @endforeach
                 </tbody>
-            </table>
 
+            </table>
         </div>
     </div>
+</div>
 
-    <script type="text/javascript" src="/dashboard/js/datetime.js"></script>
-    <script type="text/javascript">
-        window.onload = date_time('date_time');
-    </script>
-
-    @include('sweetalert::alert')
 @endsection

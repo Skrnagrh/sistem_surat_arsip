@@ -17,15 +17,15 @@ return new class extends Migration
             $table->id();
             $table->string('kodesm')->unique();
             $table->foreignId('user_id');
-            $table->string('nama');
-            $table->string('nomor');
-            $table->string('pengirim');
-            $table->string('tanggal');
-            $table->string('lamp');
-            $table->string('prihal');
-            $table->string('alamat');
-            $table->string('keterangan');
-            $table->string('pdf');
+            $table->string('nama')->nullable();
+            $table->string('nomor')->nullable();
+            $table->string('pengirim')->nullable();
+            $table->string('tanggal')->nullable();
+            $table->string('lamp')->nullable();
+            $table->string('prihal')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('keterangan')->nullable();
+            $table->string('pdf')->nullable();
             $table->timestamps();
         });
     }

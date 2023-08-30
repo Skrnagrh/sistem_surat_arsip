@@ -37,7 +37,7 @@ class UserController extends Controller
         $data['title']  = 'Profile';
         return view('dashboard.profile.edit', $data, compact('user'));
     }
-    
+
     public function update(Request $request, $id)
     {
         request()->validate([
@@ -58,7 +58,7 @@ class UserController extends Controller
             $request->image->move(storage_path('app/public/images'), $fileName);
             $user->image = $fileName;
         }
-        
+
         $user->save();
         return redirect('/userprofile')->with('success', 'Profile Anda Berhasil di Perbaharui!');
     }
@@ -73,7 +73,6 @@ class UserController extends Controller
         $user = User::find($id);
         $user->induk = $request->induk;
         $user->name = $request->name;
-        $user->jabatan_id = $request->jabatan;
 
         if (request()->hasFile('image')) {
             if ($user->image && file_exists(storage_path('app/public/images/' . $user->image))) {
@@ -85,7 +84,7 @@ class UserController extends Controller
             $request->image->move(storage_path('app/public/images'), $fileName);
             $user->image = $fileName;
         }
-        
+
         $user->save();
         return redirect('/datapengguna')->with('success', 'Profile Anda Berhasil di Perbaharui!');
     }

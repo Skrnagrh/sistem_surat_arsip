@@ -1,8 +1,11 @@
 <div class="modal fade" id="printin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title fs-5" id="exampleModalLabel">Print {{ $title }}</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
 
 
@@ -13,7 +16,7 @@
                             <thead class="text-center">
                                 <tr>
                                     <th style="justify-content: flex-end; width: 100%;" colspan="11">
-                                        <img src="/logo/Kop-surat.png" class="img-fluid"
+                                        <img src="/logo/Kop-ipt.png" class="img-fluid"
                                             style="max-height: 200px; border: #009970">
                                     </th>
                                 </tr>
@@ -65,11 +68,8 @@
 
             </div>
             <div class="modal-footer">
-                <a href="/dashboard/semua/masuk" class="btn btn-sm btn-danger">
-                    <i class="bi bi-x-circle"></i> <strong>Batal</strong>
-                </a>
-                <a class="no-print btn btn-secondary btn-sm" href="javascript:printDiv('print-area');"><i
-                        class="bi bi-printer"></i> Print</a>
+                <a data-bs-dismiss="modal" aria-label="Close" class="btn btn-danger">Batal                </a>
+                <a class="no-print btn btn-secondary" href="javascript:printDiv('print-area');">Print</a>
             </div>
         </div>
     </div>

@@ -1,86 +1,114 @@
-@extends('layouts.dashboard')
+@extends('dashboard.layouts.index')
 
 @section('content')
-<h1 class="mt-3 text-capitalize">Arsip Surat Keluar</h1>
-<hr>
-    <div class="shadow bg-body rounded mb-5">
-        <div class="card-header">
-            <i class="fas fa-table me-1"></i>
-            Arsip Surat Keluar
-        </div>
-        <div class="card-body">
 
-            <a type="create" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#createsuratkeluar"
-                data-bs-whatever="@mdo"><i class="bi bi-bookmark-plus"></i> <strong>Buat Baru</strong></a>
-            <a href="/surat/keluar/print" target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm"
-                data-bs-toggle="modal" data-bs-target="#printall"><i class="fas fa-print fa-sm"></i>
-                <strong>Print Report</strong></a>
-            @include('dashboard.keluar.create')
-            @include('dashboard.keluar.printall')
+<a type="create" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#createsuratkeluar"
+    data-bs-whatever="@mdo"><i class="bi bi-bookmark-plus"></i> Buat Baru</a>
+<a href="/surat/keluar/print" target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm"
+    data-bs-toggle="modal" data-bs-target="#printall"><i class="fas fa-print fa-sm"></i>
+    Print Report</a>
+@include('dashboard.keluar.create')
+@include('dashboard.keluar.printall')
 
-
-            <table id="datatablesSimple">
-                <thead>
+<div class="card mt-3">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="datatable" class="table table-bordered table-striped border-dark">
+                <thead class="text-center">
                     <tr>
-                        <th><strong>No</strong></th>
-                        <th><strong>Kode Arsip</strong></th>
-                        <th><strong>Nomor Surat</strong></th>
-                        <th><strong>Tujuan</strong></th>
-                        <th><strong>Tanggal Surat</strong></th>
-                        <th><strong>Perihal Surat</strong></th>
-                        <th><strong>Keterangan</strong></th>
-                        <th><strong>Action</strong></th>
+                        <th>No</th>
+                        <th>Kode Arsip</th>
+                        <th>Nomor Surat</th>
+                        <th>Tujuan</th>
+                        <th>Tanggal Surat</th>
+                        <th>Perihal</th>
+                        <th>Keterangan</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($keluar1 as $keluar)
-                        <tr>
-                            <td><strong>{{ $loop->iteration }}</strong></td>
-                            <td>{{ $keluar->kodesk }}</td>
-                            <td>{{ $keluar->nomor }}</td>
-                            <td>{{ $keluar->tujuan }}</td>
-                            <td>{{ $keluar->tanggal }}</td>
-                            <td>{{ $keluar->prihal }}</td>
-                            <td>{{ $keluar->keterangan }}</td>
-                            <td>
-                                <a href="/dashboard/keluar/{{ $keluar->id }}"
-                                    class="btn btn-success btn-sm m-1"data-bs-toggle="modal"
-                                    data-bs-target="#keluar{{ $keluar->id }}"><i class="bi bi-eye"></i>
+
+                    @php
+                    $tujuan = implode(' ', array_slice(str_word_count($keluar->tujuan, 1), 0, 5));
+                    $prihal = implode(' ', array_slice(str_word_count($keluar->prihal, 1), 0, 5));
+                    $keterangan = implode(' ', array_slice(str_word_count($keluar->keterangan, 1), 0, 5));
+                    @endphp
+
+                    @php
+                    \Carbon\Carbon::setLocale('id');
+                    @endphp
+
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $keluar->kodesk }}</td>
+                        <td>{{ $keluar->nomor }}</td>
+                        <td>{{ $tujuan }}</td>
+                        <td>{{ \Carbon\Carbon::parse($keluar->tanggal)->format('d F Y') }}</td>
+                        <td>{{ $prihal }}</td>
+                        <td>{{ $keterangan }}</td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Surat Keluar Actions">
+                                <a href="/dashboard/keluar/{{ $keluar->id }}" class="btn btn-success btn-sm"
+                                    data-bs-toggle="modal" data-bs-target="#keluar{{ $keluar->id }}"><i
+                                        class="fa fa-eye"></i>
                                 </a>
 
-                                <a href="/dashboard/keluar/{{ $keluar->id }}/edit" class="btn btn-warning btn-sm m-1"
+                                <a href="/dashboard/keluar/{{ $keluar->id }}/edit" class="btn btn-warning btn-sm"
                                     data-bs-toggle="modal" data-bs-target="#keluaredit{{ $keluar->id }}"><i
-                                        class="bi bi-pen text-light"></i>
+                                        class="fa fa-pen text-light"></i>
                                 </a>
 
                                 <a href="/dashboard/keluar/{{ $keluar->id }}" class="btn btn-sm btn-secondary"
                                     data-bs-toggle="modal" data-bs-target="#printkeluar{{ $keluar->id }}">
-                                    <i class="bi bi-printer text-light"></i>
+                                    <i class="fa fa-print text-light"></i>
                                 </a>
 
-                                <form action="/dashboard/keluar/{{ $keluar->id }}" method="post" class="d-inline">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="btn btn-danger btn-sm m-1" onclick="return confirm('Are you sure?')"><i
-                                            class="bi bi-trash"></i></button>
-                                </form>
-                                @include('dashboard.keluar.show')
-                                @include('dashboard.keluar.edit')
-                                @include('dashboard.keluar.print')
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#DeleteModal{{ $keluar->id }}">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
 
-                            </td>
-                        </tr>
+                            <div class="modal fade" id="DeleteModal{{ $keluar->id }}" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title fs-5" id="exampleModalLabel">Konfirmasi Hapus</h5>
+                                            <button type="button" class="close" data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body text-capitalize">
+                                            Apakah Anda Yakin Ingin Menghapus surat keluar {{ $keluar->tujuan }}?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Batal</button>
+                                            <form action="/dashboard/keluar/{{ $keluar->id }}" method="post"
+                                                class="d-inline" id="delete-mail">
+                                                @method('delete')
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">Ya, Hapus!</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @include('dashboard.keluar.show')
+                            @include('dashboard.keluar.edit')
+                            @include('dashboard.keluar.print')
+
+                        </td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
-
         </div>
     </div>
-
-    <script type="text/javascript" src="/dashboard/js/datetime.js"></script>
-    <script type="text/javascript">
-        window.onload = date_time('date_time');
-    </script>
-
-    @include('sweetalert::alert')
+</div>
+@include('sweetalert::alert')
 @endsection

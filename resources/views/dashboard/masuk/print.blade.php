@@ -1,69 +1,12 @@
-{{-- @extends('layouts.print')
-
-
-@section('content')
-
-<div class="row justify-content-center text-center m-4">
-        <div class="col-md-12">
-            <img src="/logo/Kop-surat.png" width="100%" height="100%"> 
-        </div>
-        
-
-    <div class="col-md-6 mb-3">
-        <h4 class="modal-title text-uppercase text-dark"><strong>Report Surat Masuk</strong></h4>
-        <p><strong>Created By {{ auth()->user()->name }}</strong></p>
-        <span id="date_time"></span>
-    </div>
-
-    <table class="table table-bordered table-sm">
-        <thead class="text-center">
-            <tr class="text-dark">
-                <th><strong>No</strong></th>
-                <th><strong>Nomor Surat</strong></th>
-                <th><strong>Pengirim</strong></th>
-                <th><strong>Tanggal Surat</strong></th>
-                <th><strong>Lampiran Surat</strong></th>
-                <th><strong>Perihal Surat</strong></th>
-                <th><strong>Alamat Surat</strong></th>
-                <th><strong>Keterangan</strong></th>
-                <th><strong>Waktu Upload</strong></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($masuk as $masuk)
-                <tr class="text-dark">
-                    <td><strong>{{ $loop->iteration }}</strong></td>
-                    <td>{{ $masuk->nomor }}</td>
-                    <td>{{ $masuk->pengirim }}</td>
-                    <td>{{ $masuk->tanggal }}</td>
-                    <td>{{ $masuk->lamp }}</td>
-                    <td>{{ $masuk->prihal }}</td>
-                    <td>{{ $masuk->alamat }}</td>
-                    <td>{{ $masuk->keterangan }}</td>
-                    <td>{{ $masuk->created_at }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
-
-    <script> 
-        window.print();
-    </script>
-    <script type="text/javascript" src="/js/datetime.js"></script>
-    <script type="text/javascript">
-        window.onload = date_time('date_time');
-    </script>
-@endsection --}}
-
-
-
 <div class="modal fade" id="printmasuk{{ $masuk->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title fs-5 text-capitalize" id="exampleModalLabel">Print Surat Masuk {{ $masuk->kodesm }}</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <div id="print-1{{ $masuk->id }}" class="print-1">
@@ -72,7 +15,7 @@
                         <thead>
                             <tr>
                                 <th style="justify-content: flex-end; width: 35%; padding: 50px;" colspan="6">
-                                    <img src="/logo/kop.png" class="img-fluid"
+                                    <img src="/logo/kop-ipt2.png" class="img-fluid"
                                         style="max-height: 80px; border: #009970">
                                 </th>
                             </tr>
@@ -125,10 +68,8 @@
             </div>
             <div class="modal-footer">
                 <div class="modal-footer">
-                    <a href="/dashboard/masuk" class="btn btn-sm btn-danger">
-                        <i class="bi bi-x-circle"></i> <strong>Batal</strong>
-                    </a>
-                    <a class="no-print btn btn-secondary btn-sm" href="javascript:printMasuk('print-1{{ $masuk->id }}');"><i class="bi bi-printer"></i> Print</a>
+                    <a data-bs-dismiss="modal" aria-label="Close" class="btn btn-danger">Batal</a>
+                    <a class="no-print btn btn-secondary" href="javascript:printMasuk('print-1{{ $masuk->id }}');">Print</a>
                 </div>
             </div>
         </div>

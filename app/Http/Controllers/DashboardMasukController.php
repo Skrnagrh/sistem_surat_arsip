@@ -19,9 +19,10 @@ class DashboardMasukController extends Controller
 
     public function index()
     {
+        $uniqueYears = Masuk::selectRaw('YEAR(created_at) as year')->distinct()->pluck('year');
         $kode = Masuk::kode();
-        return view('dashboard.masuk.index', [
-            'title' => 'Surat Masuk',
+        return view('dashboard.masuk.index', compact('uniqueYears'), [
+            'title' => 'Surat Arsip Masuk',
             'active' => 'Surat Masuk',
             'masuk1' => Masuk::latest()->where('user_id', auth()->user()->id)->paginate(5)->withQueryString(),
             'user' => User::where('id', auth()->user()->id)->get(),
@@ -37,11 +38,13 @@ class DashboardMasukController extends Controller
      */
     public function create()
     {
-        // return view('dashboard.masuk.create', [
-        //     'title' => 'Surat Masuk',
-        //     'active' => 'masuk',
-        //     'user' => User::where('id', auth()->user()->id)->get(),
-        // ]);
+        $kode = Masuk::kode();
+        return view('dashboard.masuk.create', [
+            'title' => 'Surat Masuk',
+            'active' => 'masuk',
+            'user' => User::where('id', auth()->user()->id)->get(),
+            'kodesm' =>  $kode
+        ]);
     }
 
     /**
@@ -50,9 +53,36 @@ class DashboardMasukController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // public function store(Request $request)
+    // {
+    //     // buat ngeposting data
+    //     $validatedData = $request->validate([
+    //         'kodesm' => 'required|max:255',
+    //         'nama' => 'required|max:255',
+    //         'lamp' => 'required|max:255',
+    //         'pengirim' => 'required|max:255',
+    //         'alamat' => 'required|max:255',
+    //         'tanggal' => 'required|max:255',
+    //         'nomor' => 'required|max:255',
+    //         'prihal' => 'required|max:255',
+    //         'pdf' => 'required|mimes:pdf|max:5024',
+    //         'keterangan' => 'required|max:255',
+    //     ]);
+
+    //     if ($request->file('pdf')) {
+    //         $validatedData['pdf'] = $request->file('pdf')->store('masuk');
+    //     }
+
+    //     $validatedData['user_id'] = auth()->user()->id;
+
+    //     Masuk::create($validatedData);
+    //     // untuk menampilkan alert atau kata sukses
+    //     return redirect('/dashboard/masuk')->with('success', 'Surat Masuk Berhasil Disimpan!');
+
+    // }
     public function store(Request $request)
     {
-        // buat ngeposting data
+        // Validasi data
         $validatedData = $request->validate([
             'kodesm' => 'required|max:255',
             'nama' => 'required|max:255',
@@ -72,10 +102,20 @@ class DashboardMasukController extends Controller
 
         $validatedData['user_id'] = auth()->user()->id;
 
-        Masuk::create($validatedData);
-        // untuk menampilkan alert atau kata sukses
-        return redirect('/dashboard/masuk')->with('toast_success', 'Surat Masuk Berhasil Disimpan!');
+        // Attempt to create the record
+        $masuk = Masuk::create($validatedData);
+
+        if ($masuk) {
+            return redirect('/dashboard/masuk')
+                ->with('success', 'Surat Masuk Berhasil Disimpan!');
+        } else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Gagal menyimpan Surat Masuk');
+        }
     }
+
 
     /**
      * Display the specified resource.
@@ -99,12 +139,12 @@ class DashboardMasukController extends Controller
      */
     public function edit(Masuk $masuk)
     {
-        // return view('dashboard.masuk.edit', [
-        //     'masuk' => $masuk,
-        //     'title' => 'Surat Masuk',
-        //     'user' => User::where('id', auth()->user()->id)->get(),
+        return view('dashboard.masuk.edit', [
+            'masuk' => $masuk,
+            'title' => 'Surat Masuk',
+            'user' => User::where('id', auth()->user()->id)->get(),
 
-        // ]);
+        ]);
     }
 
     /**
@@ -147,7 +187,7 @@ class DashboardMasukController extends Controller
         Masuk::where('id', $masuk->id)
             ->update($validatedData);
 
-        return redirect('/dashboard/masuk')->with('toast_success', 'Surat Masuk Berhasil Diedit!');
+        return redirect('/dashboard/masuk')->with('success', 'Surat Masuk Berhasil Diedit!');
     }
 
     /**
@@ -164,6 +204,6 @@ class DashboardMasukController extends Controller
         // buat deleted data
         Masuk::destroy($masuk->id);
         // alert sukses delete
-        return redirect('/dashboard/masuk')->with('toast_success', 'Surat Masuk Berhasil Dihapus!');
+        return redirect('/dashboard/masuk')->with('success', 'Surat Masuk Berhasil Dihapus!');
     }
 }

@@ -1,281 +1,127 @@
-{{-- @extends('layouts.dashboard')
-
-@section('content')
-    <div id="layoutSidenav" class="m-3">
-        <div id="layoutSidenav_content">
-
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card shadow">
-
-                        <div class="card-header p-0">
-                            <a href="#editsuratkeluar" class="d-block card-header" data-toggle="collapse" role="button"
-                                aria-expanded="true" aria-controls="editsuratkeluar">
-                                <h2 class="m-0 font-weight-bold text-dark"><strong>E</strong>dit <strong>S</strong>urat
-                                    <strong>K</strong>eluar <strong>U</strong>ntuk {{ $keluar->tujuan }}
-                                </h2>
-                            </a>
-                        </div>
-
-                        <form method="post" action="/dashboard/keluar/{{ $keluar->id }}" class="mb-3 p-3 text-dark"
-                            id="editsuratkeluar" enctype="multipart/form-data">
-                            @method('put')
-                            @csrf
-
-                            <input type="hidden" class="form-control" id="nama" name="nama"
-                                value="{{ old('nama', $keluar->nama) }}">
-
-                            <div class="mb-3">
-                                <label for="nomor" class="form-label"><strong>Nomor Surat</strong><span
-                                        style="color: red">*</span></label>
-                                <input type="text" class="form-control" id="nomor" name="nomor" required autofocus
-                                    value="{{ old('nomor', $keluar->nomor) }}">
-                                @error('nomor')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="tujuan" class="form-label"><strong>Tujuan Surat</strong><span
-                                        style="color: red">*</span></label>
-                                <input type="text" class="form-control" id="tujuan" name="tujuan" required
-                                    value="{{ old('tujuan', $keluar->tujuan) }}">
-                                @error('tujuan')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="tanggal" class="form-label"><strong>Tanggal Surat</strong><span
-                                        style="color: red">*</span></label>
-                                <input type="date" class="form-control" id="tanggal" name="tanggal" required
-                                    value="{{ old('tanggal', $keluar->tanggal) }}">
-                                @error('tanggal')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="lamp" class="form-label"><strong>Lampiran Surat</strong><span
-                                        style="color: red">*</span></label>
-                                <input type="text" class="form-control" id="lamp" name="lamp" required
-                                    value="{{ old('lamp', $keluar->lamp) }}">
-                                @error('lamp')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="prihal" class="form-label"><strong>Perihal Surat</strong><span
-                                        style="color: red">*</span></label>
-                                <input type="text" class="form-control" id="prihal" name="prihal" required
-                                    value="{{ old('prihal', $keluar->prihal) }}">
-                                @error('prihal')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="alamat" class="form-label"><strong>Alamat Surat</strong><span
-                                        style="color: red">*</span></label>
-                                <input type="text" class="form-control" id="alamat" name="alamat" required
-                                    value="{{ old('alamat', $keluar->alamat) }}">
-                                @error('alamat')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="keterangan" class="form-label"><strong>Keterangan Surat</strong><span
-                                        style="color: red">*</span></label>
-                                <input type="text" class="form-control" id="keterangan" name="keterangan" required
-                                    value="{{ old('keterangan', $keluar->keterangan) }}">
-                                @error('keterangan')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-0">
-                                <label class="form-label " for="pdf"><strong>File Surat (Tipe file PDF dan Ukuran file
-                                        Max. 5MB)</strong><span style="color: red">*</span></label>
-                            </div>
-                            <div class="mb-3">
-                                <input type="file" class="@error('pdf') is-invalid @enderror"
-                                    value="{{ $keluar->pdf }}" name="pdf">
-                                @error('pdf')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-
-                            <div class="modal-footer">
-                                <a href="/dashboard/keluar" class="btn btn-sm btn-outline-danger">
-                                    <i class="bi bi-arrow-left"></i> <strong>Back</strong>
-                                </a>
-                                <button type="submit" class="btn btn-sm btn-outline-primary"><i class="bi bi-send"></i>
-                                    <strong> Save</strong></button>
-                            </div>
-                        </form>
-
-                    </div>
-
+<form method="post" action="/dashboard/keluar/{{ $keluar->id }}" class="text-dark" id="editsuratkeluar"
+    enctype="multipart/form-data">
+    @method('put')
+    @csrf
+    <div class="modal fade" id="keluaredit{{ $keluar->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-5" id="exampleModalLabel">Edit Surat Keluar Tujuan {{ $keluar->kodesk }}</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
 
-        </div>
-    </div>
-@endsection --}}
-
-<div class="modal fade" id="keluaredit{{ $keluar->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Surat Tujuan {{ $keluar->tujuan }}</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body">
-                <form method="post" action="/dashboard/keluar/{{ $keluar->id }}" class="text-dark"
-                    id="editsuratkeluar" enctype="multipart/form-data">
-                    @method('put')
-                    @csrf
+                <div class="modal-body">
 
                     <input type="hidden" class="form-control" id="nama" name="nama"
                         value="{{ old('nama', $keluar->nama) }}">
 
                     <div class="mb-3">
-                        <label for="kodesk" class="form-label text-dark"><strong>Kode Surat Arsip</strong></label>
+                        <label for="kodesk" class="form-label text-dark">Kode Surat Arsip</label>
                         <input type="text" class="form-control" id="kodesk" name="kodesk"
                             value="{{ old('kodesk', $keluar->kodesk) }}" readonly>
                     </div>
 
                     <div class="mb-3">
-                        <label for="nomor" class="form-label"><strong>Nomor Surat</strong><span
-                                style="color: red">*</span></label>
+                        <label for="nomor" class="form-label">Nomor Surat</label>
                         <input type="text" class="form-control" id="nomor" name="nomor" required autofocus
                             value="{{ old('nomor', $keluar->nomor) }}">
                         @error('nomor')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                         @enderror
                     </div>
 
                     <div class="mb-3">
-                        <label for="tujuan" class="form-label"><strong>Tujuan Surat</strong><span
-                                style="color: red">*</span></label>
+                        <label for="tujuan" class="form-label">Tujuan Surat</label>
                         <input type="text" class="form-control" id="tujuan" name="tujuan" required
                             value="{{ old('tujuan', $keluar->tujuan) }}">
                         @error('tujuan')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                         @enderror
                     </div>
 
                     <div class="mb-3">
-                        <label for="tanggal" class="form-label"><strong>Tanggal Surat</strong><span
-                                style="color: red">*</span></label>
+                        <label for="tanggal" class="form-label">Tanggal Surat</label>
                         <input type="date" class="form-control" id="tanggal" name="tanggal" required
                             value="{{ old('tanggal', $keluar->tanggal) }}">
                         @error('tanggal')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                         @enderror
                     </div>
 
                     <div class="mb-3">
-                        <label for="lamp" class="form-label"><strong>Lampiran Surat</strong><span
-                                style="color: red">*</span></label>
+                        <label for="lamp" class="form-label">Lampiran Surat</label>
                         <input type="text" class="form-control" id="lamp" name="lamp" required
                             value="{{ old('lamp', $keluar->lamp) }}">
                         @error('lamp')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                         @enderror
                     </div>
 
                     <div class="mb-3">
-                        <label for="prihal" class="form-label"><strong>Perihal Surat</strong><span
-                                style="color: red">*</span></label>
+                        <label for="prihal" class="form-label">Perihal Surat</label>
                         <input type="text" class="form-control" id="prihal" name="prihal" required
                             value="{{ old('prihal', $keluar->prihal) }}">
                         @error('prihal')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                         @enderror
                     </div>
 
                     <div class="mb-3">
-                        <label for="alamat" class="form-label"><strong>Alamat Surat</strong><span
-                                style="color: red">*</span></label>
+                        <label for="alamat" class="form-label">Alamat Surat</label>
                         <input type="text" class="form-control" id="alamat" name="alamat" required
                             value="{{ old('alamat', $keluar->alamat) }}">
                         @error('alamat')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                         @enderror
                     </div>
 
                     <div class="mb-3">
-                        <label for="keterangan" class="form-label"><strong>Keterangan Surat</strong><span
-                                style="color: red">*</span></label>
+                        <label for="keterangan" class="form-label">Keterangan Surat</label>
                         <input type="text" class="form-control" id="keterangan" name="keterangan" required
                             value="{{ old('keterangan', $keluar->keterangan) }}">
                         @error('keterangan')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                         @enderror
                     </div>
 
                     <div class="mb-0">
-                        <label class="form-label " for="pdf"><strong>File Surat (Tipe file PDF dan Ukuran file
-                                Max. 5MB)</strong><span style="color: red">*</span></label>
+                        <label class="form-label " for="pdf">File Surat (Tipe file PDF dan Ukuran file
+                                Max. 5MB)</label>
                     </div>
                     <div class="mb-3">
                         <input type="file" class="@error('pdf') is-invalid @enderror" value="{{ $keluar->pdf }}"
                             name="pdf">
                         @error('pdf')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
                         @enderror
                     </div>
 
+                </div>
+                <div class="modal-footer">
+                    <a data-bs-dismiss="modal" class="btn btn-danger mt-2">Batal </a>
+                    <button type="submit" class="btn btn-primary mt-2">Simpan</button>
+                </div>
 
-
-                    <div class="modal-footer">
-                        <a href="/dashboard/keluar" class="btn btn-sm btn-danger mt-2">
-                            <i class="bi bi-x-circle"></i> <strong>Batal</strong>
-                        </a>
-                        <button type="submit" class="btn btn-sm btn-primary mt-2"><i class="bi bi-send"></i><strong>
-                                Simpan</strong></button>
-                    </div>
-                </form>
             </div>
-
         </div>
     </div>
-</div>
+</form>

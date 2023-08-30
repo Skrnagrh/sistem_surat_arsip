@@ -1,9 +1,12 @@
 <div class="modal fade" id="printkeluar{{ $keluar->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title fs-5" id="exampleModalLabel">Print Surat Keluar Tujuan {{ $keluar->kodesk }}</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <div id="print-1{{ $keluar->id }}" class="print-1">
@@ -11,7 +14,7 @@
                         <thead>
                             <tr>
                                 <th style="justify-content: flex-end; width: 35%; padding: 50px;" colspan="6">
-                                    <img src="/logo/kop.png" class="img-fluid"
+                                    <img src="/logo/kop-ipt2.png" class="img-fluid"
                                         style="max-height: 80px; border: #009970">
                                 </th>
                             </tr>
@@ -62,11 +65,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="/dashboard/keluar" class="btn btn-sm btn-danger">
-                    <i class="bi bi-x-circle"></i> <strong>Batal</strong>
+                <a data-bs-dismiss="modal" class="btn btn-danger">Batal
                 </a>
-                <a class="no-print btn btn-secondary btn-sm" href="javascript:printDiv('print-1{{ $keluar->id }}');"><i
-                        class="bi bi-printer"></i> Print</a>
+                <a class="no-print btn btn-secondary" href="javascript:printDiv('print-1{{ $keluar->id }}');">Print</a>
             </div>
         </div>
     </div>

@@ -21,7 +21,7 @@ class SemuaController extends Controller
     public function masuk()
     {
         return view('dashboard.semua.allmasuk', [
-            'title' => 'Semua Surat Arsip',
+            'title' => 'Semua Arsip Surat Masuk',
             'masuk1' => Masuk::latest()->paginate(10)->withQueryString(),
         ]);
     }
@@ -29,7 +29,7 @@ class SemuaController extends Controller
     public function keluar()
     {
         return view('dashboard.semua.allkeluar', [
-            'title' => 'Semua Surat Arsip',
+            'title' => 'Semua Arsip Surat Keluar',
             'keluar1' => Keluar::latest()->paginate(10)->withQueryString(),
         ]);
     }

@@ -1,111 +1,19 @@
-{{-- @extends('layouts.dashboard')
-
-@section('content')
-
-    <div id="layoutSidenav" class="m-4">
-        <div id="layoutSidenav_content">
-
-
-            <a href="/dashboard/semua" class="btn btn-sm btn-outline-success">
-                <i class="bi bi-arrow-left"></i>
-                <strong>Back</strong>
-            </a>
-
-            <a href="/admin/surat/masuk/{{ $masuk->id }}/edit" target="_blank" class="btn btn-outline-secondary btn-sm m-1"><i class="bi bi-printer-fill"></i> <strong>Print</strong>
-            </a>
-
-            <div class="card shadow border-bottom-primary my-3">
-                <div class="card-header p-0">
-                    <a href="#suratmasuk" class="d-block card-header" data-toggle="collapse" role="button"
-                        aria-expanded="true" aria-controls="suratmasuk">
-                        <h2 class="m-0 font-weight-bold text-dark"><strong>S</strong>urat <strong>M</strong>asuk <strong>D</strong>ari
-                            {{ $masuk->pengirim }}</h2>
-                    </a>
-                </div>
-
-                <div class="row p-3" id="suratmasuk">
-                    <div class="col-lg-5">
-                        <table class="table lg-5">
-                            <tbody class="text-dark">
-                                <tr>
-                                <tr>
-                                    <th scope="row">Nomor Surat</th>
-                                    <td>:</td>
-                                    <td>{{ $masuk->nomor }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Pengirim</th>
-                                    <td>:</td>
-                                    <td>{{ $masuk->pengirim }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Tanggal Surat</th>
-                                    <td>:</td>
-                                    <td>{{ $masuk->tanggal }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Lampiran Surat</th>
-                                    <td>:</td>
-                                    <td>{{ $masuk->lamp }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Perihal Surat</th>
-                                    <td>:</td>
-                                    <td>{{ $masuk->prihal }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Alamat Surat</th>
-                                    <td>:</td>
-                                    <td>{{ $masuk->alamat }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Keterangan </th>
-                                    <td>:</td>
-                                    <td>{{ $masuk->keterangan }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Nama Petugas</th>
-                                    <td>:</td>
-                                    <td>{{ $masuk->nama }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Waktu upload</th>
-                                    <td>:</td>
-                                    <td>{{ $masuk->created_at }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-lg-7">
-                        @if ($masuk->pdf)
-                            <embed type="application/pdf" src="{{ asset('storage/' . $masuk->pdf) }}" width="100%"
-                                height="100%" class="p-1" style="border-radius: 10px"></embed>
-                        @endif
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    
-@endsection --}}
-
-
 <div class="modal fade" id="masukshow{{ $masuk->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title fs-5" id="exampleModalLabel">Print Surat Masuk Dari Petugas {{ $masuk->nama }}
+                </h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <div class="row my">
 
                     <div class="col-md-5">
                         <div class="card card-info">
-                            <div class="card-header">
-                                <h3 class="card-title">Detail Arsip Surat Masuk</h3>
-                            </div>
 
                             <div class="card-body p-0">
                                 <table class="table">
@@ -199,12 +107,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="/dashboard/semua/masuk" class="btn btn-sm btn-danger">
-                    <i class="bi bi-arrow-left"></i> Kembali
-                </a>
+                <a data-bs-dismiss="modal" aria-label="Close" class="btn btn-danger">Kembali                </a>
 
-                <a class="no-print btn btn-secondary btn-sm" href="javascript:print1Masuk('print-1');"><i
-                        class="bi bi-printer"></i> Print</a>
+                <a class="no-print btn btn-secondary" href="javascript:print1Masuk('print-1');">Print</a>
             </div>
         </div>
     </div>
@@ -216,7 +121,7 @@
             <thead class="text-center">
                 <tr>
                     <th style="justify-content: flex-end; width: 100%;" colspan="10">
-                        <img src="/logo/Kop-surat.png" class="img-fluid" style="max-height: 200px; border: #009970">
+                        <img src="/logo/Kop-ipt.png" class="img-fluid" style="max-height: 200px; border: #009970">
                     </th>
                 </tr>
                 <tr>

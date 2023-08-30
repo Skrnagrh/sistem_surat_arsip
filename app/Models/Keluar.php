@@ -38,7 +38,7 @@ class Keluar extends Model
     public static function kode()
     {
         $bulanRomawi = array("", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
-    	$kode = DB::table('keluars')->max('kodesk');
+    	$kode = DB::table('keluars')->max('id');
     	$addNol = '';
     	$kode = str_replace("SK/", "", $kode);
     	$kode = (int) $kode + 1;

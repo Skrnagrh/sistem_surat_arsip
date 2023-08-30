@@ -14,7 +14,7 @@ class Masuk extends Model
 
     protected $guarded = ['id'];
 
-    
+
     public function masuk()
     {
         return $this->belongsTo(Masuk::class);
@@ -27,36 +27,35 @@ class Masuk extends Model
 
     public function scopeFilter($query, array $filters)
     {
-        $query->when($filters['searchmasuk'] ?? false, function($query, $search){
-            return $query->where('nama', 'like', '%'.$search.'%')
-            ->orWhere('nomor', 'like', '%'.$search.'%')
-            ->orWhere('pengirim', 'like', '%'.$search.'%')
-            ->orWhere('tanggal', 'like', '%'.$search.'%')
-            ->orWhere('alamat', 'like', '%'.$search.'%')
-            ->orWhere('keterangan', 'like', '%'.$search.'%');
+        $query->when($filters['searchmasuk'] ?? false, function ($query, $search) {
+            return $query->where('nama', 'like', '%' . $search . '%')
+                ->orWhere('nomor', 'like', '%' . $search . '%')
+                ->orWhere('pengirim', 'like', '%' . $search . '%')
+                ->orWhere('tanggal', 'like', '%' . $search . '%')
+                ->orWhere('alamat', 'like', '%' . $search . '%')
+                ->orWhere('keterangan', 'like', '%' . $search . '%');
         });
     }
 
     public static function kode()
     {
         $bulanRomawi = array("", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII");
-    	$kode = DB::table('masuks')->max('kodesm');
-    	$addNol = '';
-    	$kode = str_replace("SM/", "", $kode);
-    	$kode = (int) $kode + 1;
+        $kode = DB::table('masuks')->max('id');
+        $addNol = '';
+        $kode = str_replace("SM/", "", $kode);
+        $kode = (int) $kode + 1;
         $incrementKode = $kode;
 
-    	if (strlen($kode) == 1) {
-    		$addNol = "00";
-    	} elseif (strlen($kode) == 2) {
-    		$addNol = "0";
-    	} elseif (strlen($kode == 3)) {
-    		$addNol = "";
-    	}
+        if (strlen($kode) == 1) {
+            $addNol = "00";
+        } elseif (strlen($kode) == 2) {
+            $addNol = "0";
+        } elseif (strlen($kode == 3)) {
+            $addNol = "";
+        }
 
-    	// $kodeBaru = $addNol.$incrementKode;
-    	$kodeBaru = $addNol.$incrementKode . '/' . "SM". '/' . $bulanRomawi[date('n')] . '/' . date('Y');
-    	return $kodeBaru;
+        // $kodeBaru = $addNol.$incrementKode;
+        $kodeBaru = $addNol . $incrementKode . '/' . "SM". '/' . $bulanRomawi[date('n')] . '/' . date('Y');
+        return $kodeBaru;
     }
-
 }
