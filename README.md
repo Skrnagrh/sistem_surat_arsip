@@ -1,10 +1,12 @@
 # Surat Arsip
 
-![Surat Arsip](https://github.com/Skrnagrh/Surat-arsip/raw/main/public/images/logo.png)
-## Tampilan Aplikasi 
-https://github.com/Skrnagrh/sistem_surat_arsip/raw/main/public/tampilan/1.PNG
-
 Selamat datang di repositori proyek Surat Arsip! Proyek ini adalah aplikasi manajemen surat dan arsip berbasis web yang dibangun menggunakan framework Laravel. Aplikasi ini dirancang untuk membantu pengguna dalam mengelola surat masuk, surat keluar, serta pengarsipan dokumen secara efisien.
+
+## Tampilan Aplikasi 
+
+| <img src="https://github.com/Skrnagrh/sistem_surat_arsip/raw/main/public/tampilan/1.PNG" alt="Tampilan 1" width="100%"> | <img src="https://github.com/Skrnagrh/sistem_surat_arsip/raw/main/public/tampilan/2.PNG" alt="Tampilan 2" width="70%"> |
+|:---:|:---:|
+| Halaman Homepage. | Halaman Login. |
 
 ## Fitur Utama
 
@@ -14,7 +16,6 @@ Selamat datang di repositori proyek Surat Arsip! Proyek ini adalah aplikasi mana
 
 - **Manajemen Pengguna:** Aplikasi ini memiliki sistem manajemen pengguna yang memungkinkan Anda untuk mengelola pengguna dengan peran yang berbeda, seperti administrator dan pengguna biasa. Ini membantu dalam mengendalikan akses dan hak pengguna terhadap fungsi-fungsi aplikasi.
 
-- **Notifikasi:** Aplikasi dapat mengirim notifikasi kepada pengguna terkait status surat atau peristiwa penting lainnya. Ini membantu agar pengguna selalu mendapatkan informasi terbaru.
 
 ## Panduan Instalasi
 
