@@ -56,13 +56,16 @@ Route::middleware(['auth'])->group(function () {
     // Dashboard Profile
     Route::resource('/dashboard/profile', ProfileController::class);
 
-    // Dashboard Semua Arsip (Masuk dan Keluar)
-    Route::get('/dashboard/semua', [SemuaController::class, 'index']);
-    Route::get('/dashboard/semua/masuk', [SemuaController::class, 'masuk']);
-    Route::get('/dashboard/semua/keluar', [SemuaController::class, 'keluar']);
+    Route::middleware(['admin'])->group(function () {
+        // Dashboard Semua Arsip (Masuk dan Keluar)
+        Route::get('/dashboard/semua', [SemuaController::class, 'index']);
+        Route::get('/dashboard/semua/masuk', [SemuaController::class, 'masuk']);
+        Route::get('/dashboard/semua/keluar', [SemuaController::class, 'keluar']);
 
-    // Buat Data Pengguna
-    Route::resource('/datapengguna', DataPetugas::class)->except('show', 'create');
+        // // Buat Data Pengguna
+        Route::resource('/datapengguna', DataPetugas::class)->except('show', 'create');
+    });
+
 
     // Buat update data pengguna
     Route::patch('/penggunaupdate/{id}', [UserController::class, 'penggunaupdate'])->name('datapengguna.update');

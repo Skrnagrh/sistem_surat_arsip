@@ -38,6 +38,8 @@
                 </a>
             </li>
 
+            @if (Auth::user()->is_admin == '1')
+
             <li class="nav-header text-uppercase">Menu Admin</li>
 
             <li class="nav-item">
@@ -47,12 +49,14 @@
                 </a>
             </li>
 
+
             <li class="nav-item">
                 <a href="/datapengguna" class="nav-link {{ Request::is('datapengguna*') ? 'active' : '' }}">
                     <i class="fas fa-users nav-icon"></i>
                     <p>Data Petugas</p>
                 </a>
             </li>
+            @endif
 
         </ul>
     </nav>
