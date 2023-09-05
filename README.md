@@ -1,62 +1,77 @@
-# Surat Arsip
+# Sistem Surat Arsip
 
-Selamat datang di repositori proyek Surat Arsip! Proyek ini adalah aplikasi manajemen surat dan arsip berbasis web yang dibangun menggunakan framework Laravel. Aplikasi ini dirancang untuk membantu pengguna dalam mengelola surat masuk, surat keluar, serta pengarsipan dokumen secara efisien.
+Selamat datang di repositori Sistem Surat Arsip! Repositori ini berisi implementasi aplikasi untuk mengelola surat dan arsip menggunakan Laravel. Dalam proyek ini, Anda akan menemukan fitur-fitur untuk mengelola surat masuk, surat keluar, dan pengarsipan.
 
-## Tampilan Aplikasi 
+## Tampilan Aplikasi
 
-| <img src="https://github.com/Skrnagrh/sistem_surat_arsip/raw/main/public/tampilan/1.PNG" alt="Tampilan 1" width="100%">|
-|:---:|
-| Halaman Homepage |
+### Halaman Homepage
 
-| <img src="https://github.com/Skrnagrh/sistem_surat_arsip/raw/main/public/tampilan/2.PNG" alt="Tampilan 2" width="70%"> |
-| Halaman Login |
+![Halaman Homepage](https://github.com/Skrnagrh/sistem_surat_arsip/raw/main/public/tampilan/1.PNG)
 
-| <img src="https://github.com/Skrnagrh/sistem_surat_arsip/raw/main/public/tampilan/3.PNG" alt="Tampilan 2" width="70%"> |
-| Halaman Dashboard |
+### Halaman Login
 
-## Fitur Utama
+![Halaman Login](https://github.com/Skrnagrh/sistem_surat_arsip/raw/main/public/tampilan/2.PNG)
 
-- **Manajemen Surat Masuk dan Keluar:** Aplikasi ini memungkinkan Anda untuk mengelola surat masuk dan surat keluar dengan mudah. Anda dapat menambahkan detail surat, mengedit, menghapus, dan mencari surat berdasarkan berbagai kriteria.
+### Halaman Dashboard
 
-- **Pengarsipan Dokumen:** Fasilitas pengarsipan memungkinkan Anda untuk mengunggah dan menyimpan dokumen dalam berbagai format. Anda dapat memberikan label, mengkategorikan, dan mencari dokumen berdasarkan kategori atau kata kunci tertentu.
+![Halaman Dashboard](https://github.com/Skrnagrh/sistem_surat_arsip/raw/main/public/tampilan/3.PNG)
 
-- **Manajemen Pengguna:** Aplikasi ini memiliki sistem manajemen pengguna yang memungkinkan Anda untuk mengelola pengguna dengan peran yang berbeda, seperti administrator dan pengguna biasa. Ini membantu dalam mengendalikan akses dan hak pengguna terhadap fungsi-fungsi aplikasi.
+## Fitur
 
+Repositori ini memiliki beberapa fitur utama:
 
-## Panduan Instalasi
+1. **Manajemen Surat Masuk**: Mampu mencatat surat masuk, melihat detail surat, dan mengarsipkan surat.
 
-Berikut adalah langkah-langkah untuk menjalankan proyek ini secara lokal di mesin Anda:
+2. **Manajemen Surat Keluar**: Mampu mencatat surat keluar, melihat detail surat, dan mengarsipkan surat.
 
-1. **Klon Repositori:** Gunakan perintah berikut untuk mengklon repositori ke mesin Anda.
+3. **Pengarsipan**: Dapat mengarsipkan surat dan mencari surat yang diarsipkan.
+
+4. **Manajemen Pengguna**: Dapat mengelola pengguna aplikasi dengan peran yang berbeda seperti admin dan pengguna biasa.
+
+## Cara Menggunakan
+
+Ikuti langkah-langkah berikut untuk menjalankan proyek ini:
+
+1. Pastikan Anda telah menginstal PHP, Composer, dan Laravel di komputer Anda. Anda dapat mengunduhnya dari [Laravel website](https://laravel.com/docs/8.x/installation).
+
+2. Clone repositori ini ke komputer Anda:
+
    ```bash
-   git clone https://github.com/Skrnagrh/Surat-arsip.git
+   git clone https://github.com/Skrnagrh/sistem_surat_arsip.git
    ```
 
-2. **Buat Salinan Konfigurasi:** Salin berkas `.env.example` menjadi `.env`:
-   ```bash
-   cp .env.example .env
-   ```
+3. Buka proyek dengan IDE atau text editor yang Anda sukai.
 
-3. **Konfigurasi Database:** Buka berkas `.env` dan atur pengaturan database Anda, seperti nama database, pengguna, dan kata sandi.
+4. Salin file `.env.example` dan beri nama `.env`. Sesuaikan pengaturan database sesuai dengan konfigurasi Anda.
 
-4. **Instal Dependensi:** Masuk ke direktori proyek dan jalankan perintah berikut untuk menginstal dependensi proyek:
+5. Jalankan perintah berikut untuk menginstal dependensi:
+
    ```bash
    composer install
    ```
 
-5. **Generate Key Aplikasi:** Jalankan perintah berikut untuk menghasilkan kunci aplikasi:
+6. Generate kunci aplikasi dengan menjalankan perintah:
+
    ```bash
    php artisan key:generate
    ```
 
-6. **Migrasi dan Pengisian Awal Data:** Migrasi tabel dan pengisian awal data dengan perintah:
+7. Migrasikan basis data dengan perintah:
+
    ```bash
-   php artisan migrate --seed
+   php artisan migrate
    ```
 
-7. **Jalankan Server:** Jalankan server pengembangan Laravel:
+8. Jalankan aplikasi dengan perintah:
+
    ```bash
    php artisan serve
    ```
 
-8. **Akses Aplikasi:** Buka peramban web dan akses `http://localhost:8000` untuk melihat aplikasi.
+9. Akses aplikasi di browser Anda dengan alamat `http://localhost:8000`.
+
+10. Anda dapat masuk menggunakan akun admin atau akun pengguna biasa sesuai dengan peran yang telah ditetapkan.
+
+11. Selamat menjalankan proyek Sistem Surat Arsip!
+
+Dengan mengikuti langkah-langkah di atas, Anda dapat menjalankan proyek Sistem Surat Arsip dengan baik. Pastikan untuk melakukan konfigurasi yang sesuai dengan lingkungan Anda, terutama pengaturan database pada file `.env`.
