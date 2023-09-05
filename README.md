@@ -4,9 +4,15 @@ Selamat datang di repositori proyek Surat Arsip! Proyek ini adalah aplikasi mana
 
 ## Tampilan Aplikasi 
 
-| <img src="https://github.com/Skrnagrh/sistem_surat_arsip/raw/main/public/tampilan/1.PNG" alt="Tampilan 1" width="100%"> | <img src="https://github.com/Skrnagrh/sistem_surat_arsip/raw/main/public/tampilan/2.PNG" alt="Tampilan 2" width="70%"> |
-|:---:|:---:|
-| Halaman Homepage. | Halaman Login. |
+| <img src="https://github.com/Skrnagrh/sistem_surat_arsip/raw/main/public/tampilan/1.PNG" alt="Tampilan 1" width="100%">|
+|:---:|
+| Halaman Homepage |
+| <img src="https://github.com/Skrnagrh/sistem_surat_arsip/raw/main/public/tampilan/2.PNG" alt="Tampilan 2" width="70%"> |
+|:---:|
+| Halaman Login |
+| <img src="https://github.com/Skrnagrh/sistem_surat_arsip/raw/main/public/tampilan/3.PNG" alt="Tampilan 2" width="70%"> |
+|:---:|
+| Halaman Dashboard |
 
 ## Fitur Utama
 
