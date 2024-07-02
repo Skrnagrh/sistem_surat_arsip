@@ -4,7 +4,7 @@
             <img src="/logo/logo.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-            <a href="#" class="d-block text-capitalize" onclick="location.reload();">PT. Indah persada tech</a>
+            <a href="#" class="d-block text-capitalize" onclick="location.reload();">Sistem Surat Arsip</a>
         </div>
 
     </div>

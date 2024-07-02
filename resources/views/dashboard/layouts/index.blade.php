@@ -19,12 +19,6 @@
     <link rel="stylesheet" href="/dashboard/plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="/dashboard/plugins/summernote/summernote-bs4.min.css">
 
-
-    {{--
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="/dashboard/plugins/fontawesome-free/css/all.min.css"> --}}
     <!-- DataTables -->
     <link rel="stylesheet" href="/dashboard/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="/dashboard/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">

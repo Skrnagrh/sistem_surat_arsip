@@ -29,8 +29,6 @@
             <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
                 data-aos="fade-up" data-aos-delay="200">
                 <h1>Sistem Surat Arsip</h1>
-                <h1>PT. Indah Persada Tech</h1>
-                <h2>Jl. 45 Serang Banten Indonesia</h2>
                 <div class="d-flex justify-content-center justify-content-lg-start">
                     @auth
                     <a href="/dashboard" class="btn-get-started scrollto">Dashboard</a>

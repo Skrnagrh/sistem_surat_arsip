@@ -33,6 +33,6 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerate();
-        return redirect('/')->with('toast_success', 'Anda Berhasil Keluar');
+        return redirect('/')->with('success', 'Anda Berhasil Keluar');
     }
 }

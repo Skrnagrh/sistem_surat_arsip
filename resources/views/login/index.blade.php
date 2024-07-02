@@ -8,7 +8,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>PT. IPT | Login</title>
+    <title>Sistem Surat Arsip | Login</title>
     <meta name="description" content="" />
     <link rel="icon" type="image/x-icon" href="/logo/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -36,16 +36,11 @@
                         <div class="app-brand justify-content-center">
                             <a href="/login" class="app-brand-link gap-2">
                                 <img src="/logo/logo.png" width=100px />
-                                {{-- <span class="app-brand-text demo text-body fw-bolder">PT. INDAH PERSADA TECH</span>
-                                --}}
                             </a>
                         </div>
                         <div class="app-brand justify-content-center">
-                            <h4 class="mb-2 Text-center">PT. INDAH PERSADA TECH</h4>
+                            <h4 class="mb-2 Text-center text-uppercase">Sistem Surat Arsip</h4>
                         </div>
-                        {{-- <p class="mb-4">Please sign-in to your account and start the adventure</p> --}}
-
-
                         <form id="formAuthentication" class="mb-3" action="/login" method="POST">
                             @csrf
                             <div class="mb-3">

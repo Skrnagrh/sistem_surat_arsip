@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>PT. INDAH PERSADA TECH</title>
+    <title>Sistem Surat Arsip</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
     <link href="/logo/logo.png" rel="icon">

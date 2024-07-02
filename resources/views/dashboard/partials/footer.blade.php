@@ -1,5 +1,5 @@
 <footer class="main-footer">
-    <strong>Copyright &copy; PT. Indah Persada Tech,
+    <strong>Copyright &copy; Sistem Surat Arsip,
         <?= date('Y'); ?>
     </strong>
 </footer>
